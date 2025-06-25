@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Create the file with the exact name and content.
+# The single quotes around the filename prevent the shell from interpreting
+# any of the special characters like *, ?, $, etc.
+echo "Best School" > '"Best School"'*$?*****:)
