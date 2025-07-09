@@ -3,3 +3,4 @@
 string_a=/'Holberton school'
 # shellcheck disable=SC2034 # unused variable left to hold count values
 for i in {1..10}; do echo "$string_a"; done
+
