@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# This script displays numbers from 1 to 20, with special messages for 4, 9, and 17.
+
+# Initialize a counter variable
+count=0
+
+# Loop while the count is less than 20
+while [ "$count" -lt 20 ]; do
+  # Increment the counter for the current iteration
+  count=$((count + 1))
+
+  # Display the current number first
+  echo "$count"
+
+  # Use a case statement to check for specific iteration numbers
+  case "$count" in
+    4)
+      echo "bad luck from China"
+      ;;
+    9)
+      echo "bad luck from Japan"
+      ;;
+    17)
+      echo "bad luck from Italy"
+      ;;
+    *)
+      # For all other cases, do nothing further as the number is already displayed
+      ;;
+  esac
+done
