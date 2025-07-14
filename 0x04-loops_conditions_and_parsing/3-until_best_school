@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
-# This script is displaying "Best School" 10 times using an until loop
+# This script is displaying "Best School" 10 times
+var="Best School"
+i=0
 
-# Initialize a counter variable
-count=0
-
-# Loop until the count reaches 10
-until [ "$count" -ge 10 ]; do
-  echo "Best School"
-  # Increment the counter
-  count=$((count + 1))
+until [ $i == 10 ]; do
+    echo "$var"
+    i=$((i + 1))
 done
