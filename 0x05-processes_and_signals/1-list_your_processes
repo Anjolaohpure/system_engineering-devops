@@ -1,4 +1,14 @@
-#!/usr/bin/env bash
-# Write a Bash script that displays a list of currently running processes.
+#!/bin/bash
 
-ps -aux
+# This script displays a list of currently running processes in a user-oriented format,
+# showing all processes for all users, including those without a TTY,
+# and displaying the process hierarchy.
+
+# 'ps auxf' provides:
+# a: show all processes
+# u: user-oriented format
+# x: show processes without a controlling tty
+# f: ASCII art process hierarchy (forest format)
+
+echo "Displaying all running processes with hierarchy (user-oriented format):"
+ps auxf
