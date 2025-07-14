@@ -1,21 +1,15 @@
 #!/usr/bin/env bash
-# This script is displaying "Best School" 10 times
-i=1
+# Write a Bash script that displays:
+# The content of the current directory
+# In a list format
+# Where only the part of the name after the first dash is displayed (refer to the example)
 
-while [ $i -lt 21 ]; do
-    
-    case $i in
-        4)
-        echo "$i"
-        echo "bad luck from China";;
-        9)
-        echo "$i"
-        echo "bad luck from Japan";;
-        17)
-        echo "$i"
-        echo "bad luck from Italy";;
-        *)
-        echo "$i";;
-    esac
-    i=$((i + 1))
+files=$(ls)
+for file in $files; do
+    if [ -e "$file" ] && [ -f "$file" ]; then
+        if [[ "$file" == *-* ]]; then
+            file_name=$(echo "$file" | cut -d'-' -f2-)
+            echo "$file_name"
+        fi
+    fi
 done
