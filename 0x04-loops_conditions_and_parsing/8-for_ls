@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
-# Write a Bash script that displays:
-# The content of the current directory
-# In a list format
-# Where only the part of the name after the first dash is displayed (refer to the example)
+# This script lists all non-hidden files in the current directory,
+# showing the part after the first dash if it exists, or the full name otherwise
 
-files=$(ls)
-for file in $files; do
-    if [ -e "$file" ] && [ -f "$file" ]; then
-        if [[ "$file" == *-* ]]; then
-            file_name=$(echo "$file" | cut -d'-' -f2-)
-            echo "$file_name"
-        fi
+for file in *; do
+  # Ensure it’s a regular file or directory (not hidden)
+  if [[ -e "$file" ]]; then
+    if [[ "$file" == *-* ]]; then
+      echo "${file#*-}"
+    else
+      echo "$file"
     fi
+  fi
 done
