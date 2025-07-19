@@ -1,27 +1,8 @@
 #!/usr/bin/env bash
-# This script is designed to find the running '7-highlander' process
-# and send it a SIGTERM signal (the default signal for 'kill').
-# The '7-highlander' script is programmed to handle this signal gracefully
-# by printing a message, rather than terminating immediately.
+# Find the PID of the 7-highlander process using ps and grep
+PID=$(ps -ef | grep "[./]7-highlander" | awk '{print $2}')
 
-# Find the Process ID (PID) of the '7-highlander' process.
-# Using 'ps aux' to list all processes.
-# 'grep '[7]-highlander'' is a common trick to match the process name
-# but avoid matching the 'grep' command itself.
-# 'awk '{print $2}'' extracts the second column, which is the PID.
-PID=$(ps aux | grep '[7]-highlander' | awk '{print $2}')
-
-# Check if a PID was successfully found.
-if [ -z "$PID" ]; then
-    # If PID is empty, it means the '7-highlander' process was not found.
-    echo "Error: 7-highlander process not found. Please ensure it is running."
-    exit 1 # Exit the script with an error code.
-else
-    # If a PID was found, print it for confirmation.
-    echo "Found 7-highlander process with PID: $PID"
-    # Send the SIGTERM signal (signal 15) to the found PID.
-    # 'kill' sends SIGTERM by default, but '-15' explicitly states it.
-    kill -15 "$PID"
-    # Confirm that the signal has been sent.
-    echo "Sent SIGTERM to 7-highlander (PID: $PID)."
+# If a PID is found, send SIGTERM
+if [ -n "$PID" ]; then
+    kill -TERM "$PID"
 fi
