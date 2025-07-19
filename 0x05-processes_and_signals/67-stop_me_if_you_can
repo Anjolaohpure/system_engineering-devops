@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This script sends a SIGTERM signal to the 7-highlander process.
+
+# Find the Process ID (PID) of the 7-highlander process.
+# pgrep is used to look up processes based on name.
+PID=$(pgrep 7-highlander)
+
+# Check if a PID was found.
+if [ -z "$PID" ]; then
+    echo "Error: 7-highlander process not found."
+    exit 1
+else
+    echo "Found 7-highlander process with PID: $PID"
+    # Send the SIGTERM signal (default for kill, but explicitly shown here as 15)
+    # to the found PID.
+    # The 7-highlander script is designed to handle SIGTERM gracefully.
+    kill -15 "$PID" # or simply 'kill "$PID"' as SIGTERM is the default
+    echo "Sent SIGTERM to 7-highlander (PID: $PID)."
+fi
