@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# Define a handler for the SIGTERM signal
-trap 'echo "I am invincible!!!"' SIGTERM
+trap "echo 'I am invincible!!!'" SIGTERM
 
-# Infinite loop with a message
 while true
 do
     echo "To infinity and beyond"
