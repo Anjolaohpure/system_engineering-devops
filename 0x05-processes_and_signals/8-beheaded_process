@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Script: 8-beheaded_process
 # Purpose: Kill the 7-highlander process using SIGKILL (signal 9).
-# Context: pgrep is not available, so we use ps + grep and disable ShellCheck warning SC2009.
-# SIGKILL ensures the process is forcibly terminated and cannot ignore the signal.
+# Reason: SIGKILL is used because it cannot be ignored by the process.
+# Note: ShellCheck SC2009 is disabled because pgrep is not available in Git Bash.
 
 # shellcheck disable=SC2009
-PID=$(ps -e | grep "[./]7-highlander" | awk '{print $1}')
+PID=$(ps -ef | grep '[./]7-highlander' | grep -v grep | awk '{print $2}')
 
 if [ -n "$PID" ]; then
     kill -9 "$PID"
