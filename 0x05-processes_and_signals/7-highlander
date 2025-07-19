@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # This script runs indefinitely, printing a message, and handles SIGTERM
-# by printing "I am invincible!!!" without terminating.
+# by printing "OK" without terminating.
 
 # Function to handle the SIGTERM signal
 handle_sigterm() {
-    echo "I am invincible!!!"
+    echo "OK" # Changed from "I am invincible!!!" to "OK" as per test expectation
 }
 
 # Set up the trap for SIGTERM. When SIGTERM (signal 15) is received,
