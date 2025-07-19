@@ -1,18 +1,24 @@
 #!/usr/bin/env bash
-# This script runs indefinitely, printing a message, and handles SIGTERM
-# by printing "OK" without terminating.
+# This script runs indefinitely, printing "To infinity and beyond" every 2 seconds.
+# It is designed to handle the SIGTERM signal (sent by 'kill' by default)
+# by printing "I am invincible!!!" and then continuing its loop,
+# rather than terminating.
 
-# Function to handle the SIGTERM signal
+# Function to handle the SIGTERM signal (signal number 15)
 handle_sigterm() {
-    echo "OK" # Changed from "I am invincible!!!" to "OK" as per test expectation
+    # When SIGTERM is received, this message will be printed.
+    echo "I am invincible!!!"
 }
 
-# Set up the trap for SIGTERM. When SIGTERM (signal 15) is received,
-# the handle_sigterm function will be executed.
+# The 'trap' command tells the script what to do when a specific signal is received.
+# Here, it says: "When SIGTERM (signal 15) arrives, run the 'handle_sigterm' function."
 trap 'handle_sigterm' SIGTERM
 
-# Infinite loop to display "To infinity and beyond"
+# This is an infinite loop. The script will stay inside this loop forever
+# unless it's explicitly stopped (e.g., with SIGKILL, or Ctrl+C if not trapped).
 while true; do
+    # Print the main message of the script.
     echo "To infinity and beyond"
-    sleep 2 # Pause for 2 seconds between iterations
+    # Pause for 2 seconds before the next iteration.
+    sleep 2
 done
