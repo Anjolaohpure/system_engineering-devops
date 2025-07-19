@@ -5,11 +5,11 @@
 # by printing a message, rather than terminating immediately.
 
 # Find the Process ID (PID) of the '7-highlander' process.
-# We use 'ps aux' to list all processes, 'grep' to find lines containing
-# '7-highlander', and 'grep -v grep' to exclude the grep command itself.
-# Finally, 'awk '{print $2}'' extracts the second column, which is the PID.
-# This method is used because 'pgrep' might not be available on all systems.
-PID=$(ps aux | grep '7-highlander' | grep -v grep | awk '{print $2}')
+# Using 'ps aux' to list all processes.
+# 'grep '[7]-highlander'' is a common trick to match the process name
+# but avoid matching the 'grep' command itself.
+# 'awk '{print $2}'' extracts the second column, which is the PID.
+PID=$(ps aux | grep '[7]-highlander' | awk '{print $2}')
 
 # Check if a PID was successfully found.
 if [ -z "$PID" ]; then
