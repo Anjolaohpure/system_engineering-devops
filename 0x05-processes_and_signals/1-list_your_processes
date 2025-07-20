@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
-# This script displays a list of currently running processes in a user-oriented format,
-# showing all processes for all users, including those without a TTY,
-# and displaying the process hierarchy with full command details.
+# list all my currently running processes
 
-# 'ps -eo user,pid,ppid,lstart,etime,cmd --forest' provides:
-# -e: Select all processes.
-# -o: User-defined format.
-#   user: User who owns the process.
-#   pid: Process ID.
-#   ppid: Parent Process ID (useful for hierarchy).
-#   lstart: Start time (local time).
-#   etime: Elapsed time since the process was started.
-#   cmd: The command with all its arguments (full command line).
-# --forest: ASCII art process hierarchy (forest format).
-
-echo "Displaying all running processes with hierarchy and full command details:"
-ps -eo user,pid,ppid,lstart,etime,cmd --forest
+# source: https://linuxize.com/post/ps-command-in-linux/
+ps -auxf
