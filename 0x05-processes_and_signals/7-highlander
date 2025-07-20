@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
-# Highlander
+# This script runs indefinitely, printing "To infinity and beyond" every 2 seconds.
+# It is designed to handle the SIGTERM signal (sent by 'kill' by default)
+# by printing "I am invincible!!!" and then continuing its loop,
+# rather than terminating.
 
-# print I am invincible!!! when receiving a SIGTERM signal
-trap "echo I am invincible!!!" SIGTERM
+# Function to handle the SIGTERM signal (signal number 15)
+handle_sigterm() {
+    # When SIGTERM is received, this message will be printed.
+    echo "I am invincible!!!"
+}
 
+# The 'trap' command tells the script what to do when a specific signal is received.
+# Here, it says: "When SIGTERM (signal 15) arrives, run the 'handle_sigterm' function."
+trap 'handle_sigterm' SIGTERM
+
+# This is an infinite loop. The script will stay inside this loop forever
+# unless it's explicitly stopped (e.g., with SIGKILL, or Ctrl+C if not trapped).
 while true; do
-  echo "To infinity and beyond"
-  sleep 2
-done;
+    # Print the main message of the script.
+    echo "To infinity and beyond"
+    # Pause for 2 seconds before the next iteration.
+    sleep 2
+done
+

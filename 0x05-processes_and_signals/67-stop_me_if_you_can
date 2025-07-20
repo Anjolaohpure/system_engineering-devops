@@ -1,4 +1,27 @@
 #!/usr/bin/env bash
-# Stop me if you can
+# This script sends a SIGTERM signal to the 7-highlander process.
 
-pkill -f 7-highlander
+# Find the Process ID (PID) of the '7-highlander' process.
+# Since '7-highlander' runs 'sleep', we find the 'sleep' process
+# and then get its parent process ID (PPID), which is the '7-highlander' script's PID.
+# 'ps aux' lists all processes.
+# 'grep '[s]leep'' filters for lines containing 'sleep', using a trick to avoid matching grep itself.
+# 'awk '{print $2}'' then extracts the second column, which is the PPID (parent PID) of 'sleep'.
+PID=$(ps aux | grep '[s]leep' | awk '{print $2}')
+
+# Check if a PID was successfully found.
+if [ -z "$PID" ]; then
+    # If PID is empty, it means the '7-highlander' process (or its sleep child) was not found.
+    echo "Error: 7-highlander process not found. Please ensure it is running."
+    exit 1 # Exit the script with an error code.
+else
+    # If a PID was found, print it for confirmation.
+    echo "Found 7-highlander process with PID: $PID"
+    # Send the SIGTERM signal (signal 15) to the found PID.
+    # 'kill' sends SIGTERM by default, but '-15' explicitly states it.
+    # The '7-highlander' script is designed to handle SIGTERM gracefully
+    # by printing "I am invincible!!!" without terminating.
+    kill -15 "$PID"
+    # Confirm that the signal has been sent.
+    echo "Sent SIGTERM to 7-highlander (PID: $PID)."
+fi
